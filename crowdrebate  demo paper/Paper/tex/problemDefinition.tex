@@ -1,0 +1,171 @@
+\section{System Architecture}
+\label{sec:problemDefinition}
+In this section, we formally define some necessary concepts and formulate the Crowdrebate problem. Then we give the proof of its NP-hardness.
+
+\subsection{Warehouses}
+\label{subsec:warehouse}
+We first define the concept of warehouses.
+
+\begin{definition}[A Warehouse]
+	Let $w_i$ denote a warehouse whose location is denoted by $lw_i$.
+\end{definition}
+
+The Crowdrebate platform collaborates with some delivery companies with some warehouses to collect products of orders from stores and relay products to receivers. For example, the Sifang company~\cite{Sifang} is the official transportation company of Taobao platform~\cite{Taobao}. Users can ask stores to delivery products to Sifang. After receiving products, it can help users allocate products into several packages and deliver them to different destinations. The delivery fee would be introduced in Subsection~\ref{subsec:express}. 
+
+\subsection{Stores}
+\label{subsec:store}
+There are lots of stores on an e-commerce platform, where users can choose the products they want to buy.
+
+\begin{definition}[A Store]
+	\label{def:store}
+A store $s_i$ is denoted by a quadruple $\langle$ $ls_i$, $C_i$, $a_i$, $fe_i$ $\rangle$, where $ls_i$ is the location of the warehouse of this store, $C_i$ is the set of coupons issued by this store, $a_i$ is the maximum number of coupon types that can be used in an order, $fe_i$ is a threshold of the free-shipping service. When the total consumption of products in $s_i$ in an order exceeds this threshold, the express fee will be paid by $s_i$.
+\end{definition}
+
+According to the e-commerce platform rules~\cite{Taobao}, although there may be multiple warehouses of a store, each store will only present one warehouse on the e-commerce platform as the origin of delivering their products to the users. If the products in the warehouse are sold out, and the store has to deliver products from a warehouse with a higher delivery fee, the difference between the delivery fee would be paid by the store. Besides, to attract customers, a store may issue a set of coupons, which we will formally define in the Subsection~\ref{subsec:coupon}. Usually, the number of types of coupons issued by the same store that can be used in one order is limited. For instance, the cosmetics brand retailer Kiehl's announced its online store promotions on black Friday 2019~\cite{Kiehl's}, which provided three types of coupons. These three types of coupons could not be used in one order at the same time. Moreover, to encourage users to purchase more products, some stores would pay the delivery fee if the sum of prices of products in an order is higher than a threshold. For example, a store $s_1$ claims the threshold $fe_1$ is 68. If the sum of the products' prices in one order is higher than 68, the delivery fee would be paid by the store. %But if the sum of prices of products in an order is only 67, the delivery fee should be paid by the user. 
+Reaching the threshold of the free-shipping to save the delivery fee is one of the motivations that users want to group their requests in one order. If a store does not provide free-shipping services, its $fe_i$ can be considered as $\infty$.
+
+\subsection{Coupons}
+\label{subsec:coupon}
+In promotion operations, e-commerce platforms and stores would provide coupons to encourage users to purchase more.
+
+\begin{definition}[A coupon]
+	A coupon $c_i$ is represented by a six-tuple $\langle$ $S_i$, $q_i$, $th_i$, $d_i$, $bc_i$, $ec_i$ $\rangle$, where $S_i$ is the set of stores where $c_i$ can be used, $q_i$ is the upper bound of the times that $c_i$ can be used in an order, $bc_i$ is the time stamp when $c_i$ can start to be used and $ec_i$ is the expired time stamp of $c_i$. If the total price of products from stores in $S_i$ in an order is higher than $x \times th_i$, the order can get $x \times d_i$ rebate by using $c_i$ $x$ times, $\forall$ $x \leq q_i$.
+	
+	%$x \cdot th_i$ is the threshold of the sum of prices of products in an order which can use $c_i$ $x$ times, $d_i$ is the instant rebate by using $c_i$ each time, $bc_i$ is the time stamp when $c_i$ can start to be used and $ec_i$ is the expired time stamp of $c_i$.
+	\label{def:coupon}
+\end{definition}
+
+A coupon $c_i$ can be used in an order $x$ times if and only if the sum of prices of products in the order whose stores in $S_i$ are higher than $x \cdot th_i$. For example, a platform issues a coupon $c_1$ ``\$40 off every \$300, up to \$400'', and the coupon can be used in the stores $s_1$, $s_2$, and $s_3$ from 00:00, 2020-11-01 to 23:59, 2020-11-11. Thus, as given in Definition~\ref{def:coupon}, we will consider that $th_1$ is \$300, $d_1$ is \$40, $S_1=\{s_1,s_2,s_3\}$, $q_1$ is $10$, $bc_1$ is 00:00, 2020-11-01, and $ec_1$ is 23:59, 2020-11-11. For a coupon which can be used an unlimited number of times in one order, we consider its $q_i$ as $\infty$. If a user purchases \$320 products from $s_1$ and \$280 products from $s_2$ in an order, he can use $c_1$ twice and get \$80 rebate. But if a user purchases \$320 products from $s_1$ and \$280 products from $s_4$ in an order, he can use $c_1$ only once and get \$40 rebate.
+
+\subsection{Requests}
+\label{subsec:request}
+In this subsection, we define the concept of a request.
+	
+\begin{definition}[A request]
+	\label{def:request}
+	A request $r_i$, denoted by a tuple $\langle$ $br_i$, $u_i$, $lr_i$, $p_i$, $wt_i$, $rs_i$, $er_i$, $of_i$ $\rangle$, is sent to the Crowdrebate platform by a user at the time stamp $br_i$, where 1) $u_i$ is the receiver who the product of $r_i$ should be delivered to; 2) $lr_i$ is the location of $u_i$; 3) $p_i$ is the price of the product; 4) $wt_i$ is the weight of the product; 5) $rs_i$ is the store where the user wants to buy the product; 6) $er_i$ is the expired time after which the request $r_i$ is invalid; and 7) $of_i$ is the original delivery fee of directly delivering the product from the store to the receiver.
+\end{definition}
+
+If a request $r_i$ is not grouped with others, and a user directly buys the product from the store, $r_i$ would cost $of_i$ delivery fee. If, after we help the group with others, the delivery fee is lower than $of_i$ (because of the free-shipping services of stores mentioned in Subsection~\ref{def:store}), the difference can be considered as a benefit of the grouping. On the other hand, if after we help to group with others, the delivery fee is higher than $of_i$ (although it can get some rebate), the difference can be considered as a cost of the grouping. We will formally define the delivery and discuss the delivery fee in more detail in the Subsection~\ref{subsec:express}. Besides, each request is indivisible. 
+
+\subsection{Delivery Cost}
+\label{subsec:express}
+
+Initially, when a request is not grouped with other requests in one order, the products are packaged in expresses that are directly delivered from stores to receivers. After grouping, if the products of an order may need to be delivered to multiple receivers, the products are delivered to a warehouse of the Crowdrebate platform first. Then, the Crowdrebate platform packages products of the same receiver in one order into an express and delivers it from the warehouse to the receiver. In this subsection, we formally define a delivery.
+
+\begin{definition}
+	\label{def:delivery}
+	A delivery $e_i$, denoted by a tuple $\langle \kappa_i, \tau_i, RE_i, tw_i, ce_i\rangle$, delivers products of requests in $RE_i$ from $\kappa_i$ to $\tau_i$, where $tw_i$ is the total weight of products of requests in $RE_i$ (i.e., $tw_i = \sum\limits_{r_j \in RE_i} wt_j$), and $ce_i$ is the delivery fee of $e_i$.
+\end{definition}
+
+When a store receives an order, it would ask a delivery to deliver products to a Crowdrebate platform warehouse, which is claimed in the order. For delivery from a store, $\kappa_i$ is the store, and $\tau_i$ is the warehouse claimed in the order. Once a warehouse of the Crowdrebate platform receives a delivery from a store, it would allocate products in the delivery into several packages, and each package only contains products that would be delivered to the same receiver. For delivery from a warehouse, $\kappa_i$ is the warehouse, and $\tau_i$ is the receiver.
+ %We will illustrate how to conduct expresses, given an order, in the Subsection~\ref{subsec:order}. 
+For instance, for the order $o_1$ in the Figure~\ref{fig:solution2}, there are two deliveries, $e_1$ and $e_2$, which deliver the products of $o_1$ from stores to the warehouse $w_1$. The delivery $e_1$ delivers the products of $r_1$ and $r_2$ from $s_1$ to $w_1$. The delivery $e_2$ delivers the product of $r_3$ from $s_2$ to $w_1$. After receiving $e_1$, the Crowdrebate platform would conduct two deliveries $e_3$ and $e_4$ that deliver the product of $r_1$ to the receiver of $r_1$ and delivers the product of $r_2$ to the receiver of $r_2$, respectively.
+
+On the delivery process, the Crowdrebate platform needs to pay an express company some delivery fee, which is related to the location of the pick-up location (i.e., $\kappa_i$), the destination (i.e., $\tau_i$), and the weight of the package (i.e., $tw_i$). Since the delivery in the e-commerce scenario would cross cities, the express fee is not simply calculated by the distance between the pick-up location and the destination. For example, according to the average number of deliveries, Cainiao Guoguo, the official express company of the Taobao~\cite{Taobao}, divides cities in Mainland China into four categories. When a product of the same weight is delivered from the same place to different cities, it is cheaper to deliver them to cities with a high daily volume of expresses than cities with a low daily volume of expresses. Besides, the delivery fee is stepwise proportional to the weight of the package. For example, Cainiao GuoGuo charges a base fee for a package whose weight is less than 1kg and charges an extra fee for each kilogram added to the package's weight. Without loss of generality, we define the delivery fee measure function as following.
+
+\begin{definition}[Delivery Fee Measure Function]
+	A delivery fee measure function $F(\cdot)$ is a mapping from $(W \cup S)$ $\times$ $(W \cup U)$ $\times$ $\mathbb{R}$ to $\mathbb{R}$, where $\mathbb{R}$ is the set of real numbers, $W$ is the set of warehouses of the Crowdrebate platform, $S$ is the set of stores, $U$ is the set of receivers.
+\end{definition}
+
+Thus, given a delivery fee measure function $F(\cdot)$, the fee of $e_i$ is $ce_i = F(\kappa_i, \tau_i, tw_i)$. For simplicity, when the fee of a delivery is paid by a store, we consider $ce_i$ as 0. For example, in the Figure~\ref{fig:solution3}, suppose $e_3$ is the delivery that delivers products of $o_2$ from $s_2$ to $w_1$. Since the total price of $e_3$ is higher than 800, the delivery fee is paid by $s_2$, thus $ce_3 = 0$.
+
+
+%We have two links will use the express. When the stores send the products we ordered to our warehouses, this link uses express delivery. We also use express delivery when we repackage the products received warehouses and send them to the users.
+
+%When one store receives one order we place, this store need send the products from the location of its warehouse $sl_i$ to the location of warehouse $tl_i$ we filled in the order. If we place two orders from this store, they will send to us separately two express packages considered as $e_1$ and $e_2$. The products in $e_1$ is considered as $R_1$, the weight of $e_1$ is considered as $tw_1$, and the cost of the $e_1$ is $ce_i$.
+
+%Similar to the above process, when one of our warehouses receives the products from a store, we will identify the products according to the information that the users filled in when they sent requests. If the products come from the same consignee and have the same shipping address, we will put those products $R_i$ into a package $e_i$ and send them from our warehouse $sl_i$ to the shipping address $tl_i$.
+
+%\subsection{Cost}
+%Before we complete the crowdrebate, we have two parts need to pay the express fees. When the stores deliver the products to our warehouses, we may pay the express fees. And when we send the products to the users, we also need to pay the express fees.
+
+%\begin{definition}[one cost]
+%Given an express $e_i$ and a measure function $F$, its cost $ce_i$ is calculated by $F(tw_i, sl_i, tl_i)$.
+%\end{definition}
+
+%The express fee $ce_i$ is composed of the weight of package $tw_i$ (kilogram) and the express distance of the package, dist($sl_i$, $tl_i$) and f($sl_i$, $tl_i$), where dist($x$, $y$) and f($x$, $y$) are both the distance function between locations $x$ and $y$. We suppose $sl_i$=$x$, $tl_i$=$y$, and $tw_i$=$z$ and get the final function to calculate the cost of express fee:
+
+%\begin{equation}\mathrm{F}(x, y, z)=\left\{\begin{array}{ll}
+%\operatorname{dist}(x, y), & \text { if } x \in(0,1); \\
+%\operatorname{dist}(x, y)+\lceil\mathrm{z}-1\rceil^{*} \mathrm{f}(x, y), & \text { if } x \in(1,+\infty).
+%\end{array}\right.
+%\end{equation}
+
+ %In China different logistics companies have different way to charge the express fees. In this paper, we will make this problem more general and use distance function from Taobao when our calculate the express fees, which should be mentioned that this function won't influence the generality of our algorithms when some one change the method to calculate the express fees.
+
+\subsection{Orders}
+\label{subsec:order}
+In this subsection, we formulate the concept of an order.
+
+\begin{definition}[An order]
+	An order $o_i$, denoted by a six-tuple $\langle$ $R_i$, $SR_i$, $OC_i$, $wo_i$, $SE_i$, $RE_i$ $\rangle$, contains a set of requests $R_i$, where $SR_i$ is the set of stores of requests in $R_i$ (i.e., $SR_i$ = $\{sr_j|r_j \in R_i\}$), $OC_i$ is the set of coupons used in $o_i$, $wo_i$ is a warehouse where the products of requests in $R_i$ are delivered from stores to, $SE_i$ is a set of deliveries which deliver the products of requests in $R_i$ from stores to $wo_i$, and $RE_i$ is a set of deliveries which deliver the products of requests in $R_i$ from $wo_i$ to the receivers of requests.
+	
+	%$bo_i$ is the maximum of release times of requests in $R_i$ (i.e., $bo_i$ = $\max \{br_j|r_j \in R_i\}$), $eo_i$ is the minimum of expired times of requests in $R_i$ (i.e., $eo_i$ = $\min \{er_j|r_j \in R_i\}$), $tp_i$ is the sum of the prices of these requests (i.e., $tp_i = \sum_{r_j \in R_i} p_j$), $wo_i$ is a warehouse where the products of requests in $R_i$ are delivered from warehouses of stores,  $SE_i$ is a set of expresses which deliver the products of requests in $R_i$ from warehouses of stores to $wo_i$, and $RE_i$ is a set of expresses which deliver the products of requests in $R_i$ to the receivers of requests.
+	\label{definition2}
+\end{definition}
+
+For simplicity, we represent using a coupon $c$ $x$ times in an order $o_i$ by adding $x$ coupon $c$ in the $OC_i$. For instance, for the order $o_2$ in the Figure~\ref{fig:solution3}, $R_2 = \{r_3, r_4, r_5\}$, $SR_2 = \{s_2\}$, $OC_2 = \{c_2, c_2\}$, $wo_2 = w_1$. Suppose $e_1$ is a delivery which delivers the products of $r_3$, $r_4$, and $r_5$ from $s_2$ to $w_1$. Suppose $e_2/e_3/e_4$ is a delivery which delivers the products of $r_3/r_4/r_5$ from $w_1$ to the corresponding receiver, respectively. Thus, $SE_2 = \{e_1\}$ and $RE_2 = \{e_2, e_3, e_4\}$. 
+
+\subsection{Crowdrebate Problem}
+
+Based on the concepts mentioned above, we formulate the Crowdrebate problem.
+
+\begin{definition}
+	\label{def:problem}
+	Given a set of warehouses $W = \{w_1, \cdots, w_t\}$, a set of requests $R = \{r_1, \cdots, r_n\}$ and a set of coupons $C = \{c_1, \cdots, c_m\}$, the Crowdrebate problem aims to group requests in $R$ into a set of orders $O$ with the maximum benefit $B$ = $\sum_{o_i \in O}$ ($\sum_{c_j \in OC_i}d_j$ + $\sum_{r_j \in R_i}$ $of_j$ - $\sum_{e_j \in SE_i \cup RE_i} ce_j$), satisfying following constraints: 
+	\begin{itemize}
+		\item \textbf{Time constraint.} Each request $r_i \in R$ should be assigned during its active period $[rs_i, er_i]$, and each coupon $c_j \in C$ should be assigned during its active period $[bc_j, ec_j]$; 
+		
+		\item \textbf{Threshold constraint.} To use a coupon $c_j$ $x$ times in an order $o_i$, the total price of product from some stores in $S_j$ in $o_i$ should be higher than the threshold $th_j \times x$;
+		
+		\item \textbf{Variety constraint.} For each order $o_i \in O$ and for each store $s_j \in \bigcup_{c_k \in OC_i} S_k$, the number of types of coupons issued by $s_j$ in $OC_i$ cannot exceed $a_j$; and
+		
+		\item \textbf{Quota constraint.} For each order $o_i \in O$ and for each coupon $c_j \in C$, the number of the coupon $c_j$ in $OC_i$ cannot exceed $q_j$.
+		
+		%\item \textbf{Express constraint.} For each express $e_i$ whose $\kappa_i$ is a store, the store of each request in $RE_i$ should be $\kappa_i$. For each express $e_i$ whose $\tau_i$ is a receiver, the store of each request in $RE_i$ should be the same and the receiver of each request in $RE_i$ should be $\tau_i$.
+	\end{itemize}
+	
+\end{definition}
+
+\begin{table}[t]
+	\centering\vspace{-3ex}
+	\caption{\small Requests and Coupons.} \label{table:problem}
+	{\scriptsize
+		\begin{tabular}{c|c|c|c|c|c|c}
+			
+			{\bf Request} & {\bf $p_i$} & {\bf $rs_i$} & {\bf $br_i$} & {\bf $er_i$} & & \\ \hline
+			$r_1$ & 50 & $s_1$ & 2:00 & 4:00 & & \\
+			$r_2$ & 150 & $s_2$ & 6:00 & 8:00 & & \\
+			$r_3$ & 60 & $s_2$ & 1:00 & 3:00 & & \\
+			$r_4$ & 200 & $s_2$ & 5:00 & 7:00 & & \\
+			\hline \hline
+			{\bf Coupon} & {\bf $S_i$} & {\bf $q_i$} & {\bf $th_i$} & {\bf $r_i$} & {\bf $bc_i$} & {\bf $ec_i$}\\ \hline
+			$c_1$ & $\{s_1\}$ & 1 & 120 & 30 & 2:00 & 3:00\\
+			$c_2$ & $\{s_2\}$ & 5 & 50 & 5 & 1:00 & 7:00\\
+			$c_3$ & $\{s_1, s_2\}$ & 1 & 100 & 20 & 2:00 & 5:00\\
+			\hline
+		\end{tabular}
+	}
+\end{table}
+
+For example, there are four requests and three coupons whose details are shown in the Table~\ref{table:problem}. The store $s_1$ issues the coupon $c_1$, and the store $s_2$ issues the coupons $c_2$ and $c_3$. The number of types of coupons that are issued by $s_2$ and can be used in an order cannot exceed 1, i.e., $a_2 = 1$. In other words, $c_2$ and $c_3$ cannot be used in an order simultaneously. We cannot group $r_1$ and $r_2$ in an order, since their active periods do not match, violating the \textbf{time constraint}. We group $r_1$ and $r_3$ into an order $o_1$. We group $r_2$ and $r_4$ into an order $o_2$. For $o_1$, we cannot assign $c_1$ to it, since the total price of products from $s_1$ is less than $120$, not satisfying the \textbf{threshold constraint}. However, we can assign $o_1$ with a coupon $c_3$, since the total price of products from $S_3$ is higher than 100. Since we have assigned $o_1$ with a coupon $c_3$, we cannot assign $o_1$ with another coupon $c_2$. Otherwise, the number of types of coupons issued by $s_2$ in $o_1$ is larger than $a_2$, violating the \textbf{variety constraint}. For $o_2$, we cannot assign it with $c_3$, since their active periods do not match, violating the \textbf{time constraint}. For $o_2$, according to the \textbf{quota constraint}, we can use $c_2$ just 5 times, since 350 $>$ 5 $\times$ 50 and $q_2 = 5$.
+\subsection{NP-hardness}
+
+Then, we prove the NP-hardness of Crowdrebate problem.
+
+\begin{theorem}
+	\label{theorem:NP}
+	The Crowdrebate problem is NP-hard.
+\end{theorem}
+
+\begin{proof}
+	We prove the theorem by a reduction from the number partitioning problem~\cite{hayes2002computing}. Due to the space limitation, we omit the details. For the full proof, please refer to our technical report~\cite{Report}.
+%We first prove the decision version of the Crowdrebate problem is an NP-Complete problem by a reduction from the number partitioning problem~\cite{hayes2002computing}. The number partitioning problem can be described as follows: Given a set of $n$ positive numbers $PN = \{pn_1, pn_2, \cdots, pn_m\}$, the number partition problem aims to find a subset of $PN$, denoted by $PN^*$, such that $\sum_{pn_i \in PN^*} pn_i = \sum_{pn_j \in PN \backslash PN^*} pn_j$.
+
+%The decision version of the Crowdrebate (D-Crowdrebate) problem aims to decide if there is a set of orders whose utility is $X$. For a given number partitioning problem instance, we can transform it to a D-Crowdrebate problem instance as follows: There is a set of $n$ requests, $R = \{r_1, r_2, \cdots, r_n\}$, where the price of $r_i$ is $pn_i$ (i.e., $p_i$ = $pn_i$), the receiver of $r_i$ is $u_1$, and the store of $r_i$ is $s_1$. There is only a warehouse $w_1$ whose location is equal to $u_1$ and $\forall tw, F(w_1, u_1, tw) = 0$. There is only one coupon $c_1$ whose threshold $th_1$ = $\frac{\sum_{r_i \in R} p_i}{2}$, the store set $S_1$ is $\{s_1\}$, the upper bound of the number of $c_1$ can be used in an order is 1, and the rebate is $d_1$. For the store $s_1$, the threshold of free express is large enough, i.e., $fe_1 = \infty$. Besides, we set $X$ as $2 \cdot d^*$. Thus, if the D-Crowdrebate can find an assignment whose total rebate is $X$, the number partitioning problem can find a subset of $PN^*$ such that $\sum_{pn_i \in PN^*} pn_i = \sum_{pn_j \in PN \backslash PN^*} pn_j$.
+
+%Given this mapping, we can show that the number partitioning problem can be solved if and only if the transformed D-Crowdrebate problem can be solved. Thus, we can reduce the number of partitioning problems to the D-Crowdrebate problem. Since the number partitioning problem is a famous NP-Complete problem~\cite{hayes2002computing}, the D-Crowdrebate problem is also an NP-Complete problem. Since Crowdrebate is an optimization problem, Crowdrebate is an NP-hard problem.
+\end{proof}
+
+  

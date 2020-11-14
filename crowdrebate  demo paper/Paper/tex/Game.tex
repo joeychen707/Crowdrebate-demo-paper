@@ -1,0 +1,54 @@
+\section{Relaxation Approach}
+
+\begin{algorithm}[t]
+	\DontPrintSemicolon
+	{
+		\KwIn{A set of warehouses $W$, a set of requests $R$ and a set of coupons $C$}
+		\KwOut{A set of orders $O$}
+		initialization;\;
+		\Repeat{reaching a Nash equilibrium}{
+			\ForEach{request $r_i$ in $R$}{
+				\ForEach{order $o_j$ in $O$}{
+					$CO_j'$ = Greedy\_Coupon($o_j + r_i$, $C$), get $u(i,j)$;\;
+				}
+				set $stg_i$ as $o_j$ whose $u(i,j)$ is the largest;\;
+			}
+		}
+		retrieve the order set $O$;\;
+		\ForEach{order $o_i \in O$}{
+			\ForEach{warehouse $w_j \in W$}{
+				calculate $\theta(i, j)$;\;
+			}
+			$w_{j^*}$ $\leftarrow$ the warehouse whose $\theta(i, j)$ is the largest;\;
+			\If{$\theta(i, j^*) \geq 0$}{
+				assign $w_{j^*}$ to $o_i$;\;
+			}
+		}
+		\Return{the order set $O$;\;}
+		\caption{Game\_Relaxation Algorithm}
+		\label{algo:Game}
+	}
+\end{algorithm}
+
+We define the utility function of each player as following:
+
+\begin{equation*}
+u(i,j) = \frac{\sum_{o_g \in O}\sum_{c_k \in CO_g} d_k}{|R|}
+\end{equation*}
+
+We define the potential function of the game as following:
+
+\begin{equation*}
+\Phi(st_i, \overline{st_i}) = \frac{\sum_{o_i \in O}\sum_{c_j \in CO_i} d_j}{|R|}
+\end{equation*}
+
+\begin{theorem}
+	The time complexity of the Game\_Relaxation Algorithm is $\mathcal{O}(n^4 \cdot m \cdot d_{max} \cdot p_{max}^2 + n\cdot t)$.
+\end{theorem}
+\begin{proof}
+	Since $\Phi(st_i, \overline{st_i}) - \Phi(st_{i}', \overline{st_i}) = u(i, j) - u(i, j')$, by~\cite{}, our game is an exact potential game. Besides, the set of strategy sets of each player is finite, the best-response procedure (line 2-7) always can reach a Nash equilibrium. In each round of the best-response process, $\Phi(st_i, \overline{st_i})$ decreases at least $\frac{1}{n}$. Since $\Phi(st_i, \overline{st_i})$ $\leq$ $\frac{p_{max} \cdot d_{max}}{th_{min}}$, the number of the rounds of the best-response procedure is $\mathcal{O}(\frac{n \cdot p_{max} \cdot d_{max}}{th_{min}})$. Thus, the total time complexity of the best-response procedure is $\mathcal{O}(n^4 \cdot m \cdot d_{max} \cdot p_{max}^2)$. Thus, the total time complexity of the Game\_Relaxation algorithm is $\mathcal{O}(n^4 \cdot m \cdot d_{max} \cdot p_{max}^2 + n\cdot t)$.
+\end{proof}
+
+\begin{theorem}
+	The approximation ratio of the Game\_Relaxation Algorithm is $\frac{d_{min} \cdot th_{min}}{d_{max} \cdot th_{max}} \cdot (\frac{1}{2} - \frac{th_{max} \cdot t}{2 \cdot n \cdot p_{max}}) - \frac{ce_{max} \cdot th_{min}}{p_{max} \cdot d_{max}}$.
+\end{theorem}

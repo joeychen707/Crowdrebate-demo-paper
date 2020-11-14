@@ -1,0 +1,45 @@
+\section{System Architecture}
+
+\subsection{set up new request}
+
+As shown in figure~\ref{fig:ar} depicts the architecture of Crowdrebate platform. The user interface module runs on the client side, enabling both general users and merchant users to get corresponding services. The other three modules, crowdrebate algorithm, process automation and recommendation system, run on the server host and provide support for the core functionalities in Crowdrebate. We introduce the technical details of these modules in the rest part of this section.
+
+\subsection{User Interface}
+
+There are two types of users interact with the user interface module, ``general users'' and ``merchant users''. General users, who seek for group buying to meet the threshold of rebates, can request and track their orders with the interface while getting personalized recommendation. Merchant users from online shopping platforms, can benefit from the data dashboard to gain a better understanding of user portraits. This module consists of the following four functions.
+
+\subsubsection{Order Requesting}
+
+Users with needs for group shopping can post their requirement on Crowdrebate with this order requesting function. The input for this function consists of two parts, product information and customer information. The former one includes the shopping platform, product link and promotion type which help the web crawlers to target the certain item and its promotions. The key part of customer information are expected time slots and delivery address that have an impact on the rounds and delivery costs for the crowdrebate algorithm to run.
+
+\subsubsection{Order Tracking}
+
+The order tracking function enables users to manage all historical orders. No matter whether one's item is waiting in the pool, being processed to place a order, or already on delivery, users can track realtime status for his order. Crowdrebate platform utilizes the web crowler, crowdrebate algorithm and order scripts to automate the process of group ordering, and updates data timely for users to track.
+	
+\subsubsection{Item Recommendation}
+
+The item recommendation functions shows users products that best fit personal demands. Crowdrebate  have top coupons and recommended products on the home page, where all users share the same information of top coupons while the recommended products are personalized. Both features are fed with datas from Crowdrebate.
+
+\subsubsection{Dashboard Visualization}
+
+Crowdrebate opens API and provides visualized data dashboard to cooperating online shopping platform. With the visualized dashboard, merchant users have access to internal datas depicting user portraits, product sales and coupon popularity.
+
+\subsection{Crowdrebate Algorithm}
+
+Crowdrebate algorithm can place orders for users' best interests, and works as one of the most crucial components in our platform. Considering combination for coupons and delivery costs, Crowdrebate proposed two algorithms to adapt different scenarios.
+
+\textbf{``The Order-First Algorithm.''} In most cases, coupons with strict thresholds usually guarantee tempting rebates that should way cover the delivery costs. Under such a scenario, we propose the order-first algorithm to place orders. Generally speaking, this algorithm greedily packs orders for a maximal amount of total rebates while ignoring delivery costs. For each coupon $c_i$, we traverse requests $o_j$ in the pool that is eligible and calculate the differential rebate amount when compared to placing an order separately, and the request with the largest amount will be integrated into one order until for any request the differential rebate amount fails to increase. However, the amount of coupons used in a newly merged order may exceed the upper limit since their amounts are calculated separately before the merger. We introduce *Dif procedure* to tackle extra coupons. After packing requests, we need to place the order and assign one single address as the delivery destination. While this algorithm doesn't take delivery into account before, now it assigns a warehouse to the order to minimize the cost of delivery.
+
+\textbf{``The Warehouse-First Algorithm.''} The order-first algorithm performs well in most cases, however, it still suffers from two drawbacks. The first one is due to its lack of consideration for delivery costs, and once the delivery cost gets much higher this algorithm performs poorly. The second defect results from the time complexity introduced by the error correction ``Dif procedure'', which can be fatal when handling peak shopping festival traffic. As a result, a more efficient approach, the warehouse-first algorithm, is proposed to tackle the large scale data and non-negligible delivery costs. Instead of directly combining requests for higher rebates, we first group those requests sharing the same warehouse $w_j$. Only then will we merge requests within the same warehouse for higher rebates. The preprocessing procedure devides the integral data set into smaller groups to constrain the batch size and running time, and grouping by delivery destination guarantees relatively small delivery costs. Basically the warehouse-first algorithm is more efficient, and can produce a better result for higher delivery costs while the order-first algorithm stands out when rebates are profitable enough to cove delivery costs.
+
+\subsection{Process Automation}
+
+rowdrebate uses the process automation module to complete the whole procedure from picking items to pay for orders in our server. Basically the module is composed of two sub-modules, the web crawler retrieving the information of products and coupons, and the order bot to automatically place an order. 
+
+\textbf{``The Web Crawler.''} Currently, two types of information will be crawled respectively, products and coupons. For the product information, this module retrieves the data passively. Before the user can post a request, a URL linked to the product must be provided to activate the web crawler. With the pasted URL, the spiderbot crawls the associated coupons along with the product information, and will specifically return options like size or color for the user to choose. In addition, we actually crawl all the meta data of this product for further recommendation function. For the coupon information, this module actively seeks for data. We take the initiative to crawl information from coupon websites like Etao, Alimama to enrich our avaliable coupon pools. 
+
+\text{``The Order Bot.''} The crowdrebate algorithm runs in rounds periodically and produces final grouped orders each round. Therefore we develop the order bot to automatically handle those orders. Since some exclusive coupons in different orders may violate each other , we introduce mlutiple accounts to place  those exclusive orders which also enables us to run the scripts in parallel.
+
+\subsection{Recommendation System}
+
+The recommendation system module is one of the key features of Crowdrebate. Considering the online shopping scenario, there won't be a huge change for items on sale, and the similarity of items is relatively stable to the user’s interest, so we adapt the item-based collaborative filtering (ItemCF) to recommend similar products. The recommendation system is built upon meta datas from the web crawler and users' historical requests and ratings. Since users on Crowdrebate pursue higher rebates, we improved the ItemCF to rank on rebate amount instead of similarities to better meet their demands. 

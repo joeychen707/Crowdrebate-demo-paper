@@ -1,0 +1,325 @@
+\appendix
+
+\subsection{Proof of Theorem \uppercase\expandafter{\romannumeral2}.1}
+\noindent\textbf{Theorem \uppercase\expandafter{\romannumeral2}.1}
+The Crowdrebate problem is NP-hard.
+
+\begin{proof}
+	We first prove the decision version of the Crowdrebate problem is an NP-Complete problem by a reduction from the number partitioning problem~\cite{hayes2002computing}. The number partitioning problem can be described as follows: Given a set of $n$ positive numbers $PN = \{pn_1, pn_2, \cdots, pn_m\}$, the number partition problem aims to find a subset of $PN$, denoted by $PN^*$, such that $\sum_{pn_i \in PN^*} pn_i = \sum_{pn_j \in PN \backslash PN^*} pn_j$.
+	
+	The decision version of the Crowdrebate (D-Crowdrebate) problem aims to decide if there is a set of orders whose utility is $X$. For a given number partitioning problem instance, we can transform it to a D-Crowdrebate problem instance as follows: There is a set of $n$ requests, $R = \{r_1, r_2, \cdots, r_n\}$, where the price of $r_i$ is $pn_i$ (i.e., $p_i$ = $pn_i$), the receiver of $r_i$ is $u_1$, and the store of $r_i$ is $s_1$. There is only a warehouse $w_1$ whose location is equal to $u_1$ and $\forall tw, F(w_1, u_1, tw) = 0$. There is only one coupon $c_1$ whose threshold $th_1$ = $\frac{\sum_{r_i \in R} p_i}{2}$, the store set $S_1$ is $\{s_1\}$, the upper bound of the number of $c_1$ can be used in an order is 1, and the rebate is $d_1$. For the store $s_1$, the threshold of free express is large enough, i.e., $fe_1 = \infty$. Besides, we set $X$ as $2 \cdot d^*$. Thus, if the D-Crowdrebate can find an assignment whose total rebate is $X$, the number partitioning problem can find a subset of $PN^*$ such that $\sum_{pn_i \in PN^*} pn_i = \sum_{pn_j \in PN \backslash PN^*} pn_j$.
+	
+	Given this mapping, we can show that the number partitioning problem can be solved if and only if the transformed D-Crowdrebate problem can be solved. Thus, we can reduce the number of partitioning problems to the D-Crowdrebate problem. Since the number partitioning problem is a famous NP-Complete problem~\cite{hayes2002computing}, the D-Crowdrebate problem is also an NP-Complete problem. Since Crowdrebate is an optimization problem, Crowdrebate is an NP-hard problem.
+\end{proof}
+
+\subsection{Proof of Lemma \uppercase\expandafter{\romannumeral3}.1}
+
+\noindent\textbf{Lemma \uppercase\expandafter{\romannumeral3}.1}
+The time complexity of the Dif() Procedure is $\mathcal{O}(|CO_\alpha| \cdot |RO_\alpha| + |CO_\beta| \cdot |RO_\beta|)$, where $|CO_{\alpha/\beta}|$ is the number of types of coupons that are added to $o_{\alpha/\beta}$ and $|RO_{\alpha/\beta}|$ is the number of requests that are added to $o_{\alpha/\beta}$.
+
+\begin{proof}
+	Since there are only $|CO_{\alpha}|$ coupons in $o_{\alpha}$, the number of rounds of the for-loop in line 3-4 is $\mathcal{O}(|CO_{\alpha}|)$. For each round of the for-loop, the time complexity of calculating $ro_i$ is $\mathcal{O}(|RO_\alpha|)$. Thus, the time complexity from line 2 to line 5 is $\mathcal{O}(|CO_\alpha| \cdot |RO_\alpha|$. Similarly, the time complexity from line 6 to line 9 is $\mathcal{O}(|CO_\beta| \cdot |RO_\beta|)$. Since the states when calculating $ro_i$ in line 4 and calculating $ro_i$ in line 8 can be stored to calculate $ro_j$ in line 15, the time complexity from line 11 to line 17 can be ignored. Thus, the total time complexity of the Dif() Procedure is $\mathcal{O}(|CO_\alpha| \cdot |RO_\alpha| + |CO_\beta| \cdot |RO_\beta|)$.
+\end{proof}
+
+\subsection{Proof of Theorem \uppercase\expandafter{\romannumeral3}.1}
+
+\noindent\textbf{Theorem \uppercase\expandafter{\romannumeral3}.1}
+The time complexity of the Order-First Algorithm is $\mathcal{O}(n^2)$, where $n$ is the number of requests.
+
+\begin{proof}
+	Since the number of requests is $n$, for each coupon $c_i$, there are at most $n$ new orders $o^\#$ can be generated in the repeat-loop (line 3-14). By Lemma~\ref{lemma:dif_time}, the time complexity of generating an $o^\#$ is $\mathcal{O}(n)$ (line 5-12). Compared with $n$, the number of coupons usually can be ignored. Thus, the time complexity of the first for-loop (line 2-14) is $\mathcal{O}(n^2)$. After the first for-loop, the number of orders in $O$ is at most $\mathcal{O}(n)$. Compared with $n$, the number of warehouses usually can be ignored. Thus, the time complexity of the second for-loop (line 15-21) is $\mathcal{O}(n)$. Thus, the total time complexity of the Order-First Algorithm is $\mathcal{O}(n^2)$.
+\end{proof}
+
+\subsection{Proof of Theorem \uppercase\expandafter{\romannumeral3}.2}
+
+\noindent\textbf{Theorem \uppercase\expandafter{\romannumeral3}.2}
+The approximation ratio of the Order-First Algorithm is $\sum\limits_{c_i \in C} \frac{ \min \{\lfloor \lambda_{min}(i) \rfloor, q_i \cdot th_i\} - \mu_i \cdot c_{max}}{n \cdot \lambda_{max}(i) + \mu_i \cdot of_{max}}$, where $n$ is the number of requests in $R$, $\mu_i = \frac{n \cdot th_i}{d_i \cdot |C|}$, $c_{max}$ is the highest delivery cost, $of_{max}$ is the highest original delivery fee, $\lambda_{min}(i) = \min\{\lambda_{i, j} | \forall j \in [bc_i, ec_i]\}$, and $\lambda_{max}(i) = \max\{\lambda_{i, j} | \forall j \in [bc_i, ec_i]\}$.
+
+\begin{proof}
+	Since for a coupon $c_i$, the total prices of requests that are active at the same time stamp is higher than $\lambda_{min}(i)$, without considering the quota constraint, the number of times that $c_i$ can be used is at least $\lfloor \frac{\lambda_{min}(i)}{th_i} \rfloor$. Considering the quota constraint, the number of times that $c_i$ can be used is at least $\min \{\lfloor \frac{\lambda_{min}(i)}{th_i} \rfloor, q_i\}$. Since for a coupon $c_i$, the total prices of requests that are active at the same time stamp does not exceed $\lambda_{max}(i)$, the number of times that $c_i$ can be used does not exceed $\frac{n \cdot \lambda_{max}(i)}{th_i}$. Since the extra delivery cost of an order does not exceed $c_{max}$, the total extra delivery cost of the solution of Order-First Algorithm does not exceed $c_{max} \cdot n$. Since the original delivery fee does not exceed $of_{max}$, the total delivery fee that can be saved by the optimal solution does not exceed $of_{max} \cdot n$. Thus, the approximation ratio is $\frac{(\sum_{c_i \in C}\min \{\lfloor \frac{\lambda_{min}(i)}{th_i} \rfloor, q_i\} \cdot d_i) - n \cdot c_{max}}{(\sum_{c_i \in C} \frac{n \cdot \lambda_{max}(i)}{th_i} \cdot d_i) + n \cdot of_{max}} = \sum\limits_{c_i \in C} \frac{ \min \{\lfloor \lambda_{min}(i) \rfloor, q_i \cdot th_i\} - \mu_i \cdot c_{max}}{n \cdot \lambda_{max}(i) + \mu_i \cdot of_{max}}$.
+\end{proof}
+
+\subsection{Proof of Theorem \uppercase\expandafter{\romannumeral4}.1}
+
+\noindent\textbf{Theorem \uppercase\expandafter{\romannumeral4}.1}
+The time complexity of the Warehouse-First Algorithm is $\mathcal{O}(\sum\limits_{w_i \in W} n_i^2)$, where $n_i$ is the number of requests that are assigned to the warehouse $w_i$.
+
+\begin{proof}
+	Since the number of requests that are assigned to $w_i$ is $n_i$, for each coupon $c_i$, there are at most $n_i$ new orders $o^\#$ can be generated in the repeat-loop (line 7-18). Since the number of orders in $WO_i$ is $\mathcal{O}(n_i)$, by Lemma~\ref{lemma:dif_time}, the time complexity of generating an $o^\#$ is $\mathcal{O}(n_i)$ (line 9-16). Compared with $n_i$, the number of coupons usually can be ignored. Thus, the time complexity of merging orders in $WO_i$ is $\mathcal{O}(n_i^2)$ (line 6-18). Thus, the time complexity of merging all orders in warehouses is $\mathcal{O}(\sum\limits_{w_i \in W} n_i^2)$ (line 5-18). The time complexity of updating orders in $O$ is $\mathcal{O}(\sum\limits_{w_i \in W} n_i)$. Thus, the time complexity of the Warehouse-First Algorithm is $\mathcal{O}(\sum\limits_{w_i \in W} n_i^2)$.
+\end{proof}
+
+\subsection{Proof of Theorem \uppercase\expandafter{\romannumeral4}.2}
+
+\noindent\textbf{Theorem \uppercase\expandafter{\romannumeral4}.2}
+The approximation ratio of the Warehouse-First Algorithm is $\sum\limits_{w_k \in W}\sum\limits_{c_i \in C}\frac{ \min \{\lfloor \lambda_{min}(i, k) \rfloor, q_i \cdot th_i\} - \epsilon_{i, k} \cdot c^*_{min}}{n \cdot \lambda_{max}(i, k) + \epsilon_{i, k} \cdot of_{max}}$, where $n$ is the number of requests in $R$, $\epsilon_{i, k} = \frac{n \cdot th_i}{d_i \cdot |C| \cdot |W|}$, $c^*_{min}$ is the maximum of minimum extra delivery cost of each request (i.e., $c^*_{min} = \max \{cw(g)|r_g \in R\}$), $of_{max}$ is the highest original delivery fee, $\lambda_{min}(i, k) = \min\{\lambda_{i, j, k}| \forall j \in [bc_i, ec_i]\}$, and $\lambda_{max}(i, k) = \max\{\lambda_{i, j, k}|\forall j \in [bc_i, ec_i]\}$.
+
+\begin{proof}
+	Since for a coupon $c_i$, the total prices of requests that are active at the same time stamp and are assigned to $w_k$ is higher than $\lambda_{min}(i, k)$, without considering the quota constraint, the number of times that $c_i$ can be assigned to orders that are assigned to $w_k$ is at least $\lfloor \frac{\lambda_{min}(i, k)}{th_i} \rfloor$. Considering the quota constraint, the number of times that $c_i$ can be assigned to orders that are assigned to $w_k$ is at least $\min \{\lfloor \frac{\lambda_{min}(i, k)}{th_i} \rfloor, q_i\}$. Since for a coupon $c_i$, the total prices of requests that are active at the same time stamp and are assigned to $w_k$ does not exceed $\lambda_{max}(i, k)$, the number of times that $c_i$ can be assigned to orders that are assigned to $w_k$ does not exceed $\frac{n \cdot \lambda_{max}(i, k)}{th_i}$. Since the extra delivery cost of an order does not exceed $c_{min}^*$, the total extra delivery cost of the solution of Warehouse-First Algorithm does not exceed $c_{min}^* \cdot n$. Since the original delivery fee does not exceed $of_{max}$, the total delivery fee that can be saved by the optimal solution does not exceed $of_{max} \cdot n$. Thus, the approximation ratio is $\frac{(\sum\limits_{w_k \in W}\sum\limits_{c_i \in C}\min \{\lfloor \frac{\lambda_{min}(i, k)}{th_i} \rfloor, q_i\} \cdot d_i) - n \cdot c_{min}^*}{(\sum\limits_{w_k \in W}\sum\limits_{c_i \in C} \frac{n \cdot \lambda_{max}(i, k)}{th_i} \cdot d_i) + n \cdot of_{max}}$ = $\sum\limits_{w_k \in W}\sum\limits_{c_i \in C}\frac{ \min \{\lfloor \lambda_{min}(i, k) \rfloor, q_i \cdot th_i\} - \epsilon_{i, k} \cdot c^*_{min}}{n \cdot \lambda_{max}(i, k) + \epsilon_{i, k} \cdot of_{max}}$.
+\end{proof}
+
+\subsection{Results on Synthetic Data Sets}
+\begin{figure}[t!]\centering 
+	\subfigcapskip=-5pt
+	\subfigure{		\scalebox{0.3}[0.25]{\includegraphics{../figures/bar.png}}}\vspace{-2ex}
+	\addtocounter{subfigure}{-1}
+	\subfigure[][{Benefit}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_a_benefit}}
+	\label{subfig:syn_a_benefit}}
+	\subfigure[][{Running Time}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_a_runningtime}}
+	\label{subfig:syn_a_runningtime}}\figureCaptionMargin
+	\vspace{1ex}
+	\caption{\small Effect of $a$ (Syn).}\figureBelowMargin
+	\label{fig:syn_as}
+\end{figure}
+\textbf{Effect of the range of each store's variety bound.} Figure~\ref{fig:syn_as} illustrates the experimental results on different ranges of each store's variety bound, from [1, 2] to [1, 6]. In Figure~\ref{subfig:syn_a_benefit}, the benefits of orders obtained by the four approaches keep stable when the range of each store's variety bound change. The reason is that when the number of requests and the number of coupons are large enough, the effect of the variety constraint on the assignment can be ignored. In Figure~\ref{subfig:syn_a_runningtime}, as expected, the running time of four algorithms keep stable with the change of the range of each store's variety bound.
+
+\begin{figure}[t!]\centering 
+	\subfigcapskip=-5pt
+	\subfigure{
+		\scalebox{0.3}[0.25]{\includegraphics{../figures/bar.png}}}\vspace{-2ex}
+	\addtocounter{subfigure}{-1}
+	\subfigure[][{Benefit}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_fe_benefit}}
+		\label{subfig:syn_fes_benefit}}
+	\subfigure[][{Running Time}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_fe_runningtime}}
+		\label{subfig:syn_fes_runningtime}}\figureCaptionMargin
+	\vspace{1ex}
+	\caption{\small Effect of $fe$ (Syn).}\figureBelowMargin
+	\label{fig:syn_fes}
+\end{figure}
+
+\textbf{Effect of the range of each store's free-shipping threshold.} Figure~\ref{fig:syn_fes} illustrates the experimental results on different ranges of each store's free-shipping threshold, from [0, 50] to [0, 250]. In Figure~\ref{subfig:syn_fes_benefit}, the benefits of orders obtained by the four approaches increase with the increase of the threshold of each store's free-shipping service. The reason is that, the higher the thresholds, the higher the original delivery fee of each request. After grouping requests into orders, the price of orders can reach the threshold of free-shipping services. Thus, the original delivery fee is saved. Thus, the higher the original delivery fee, the higher the benefits of orders. In Figure~\ref{subfig:syn_fes_runningtime}, the running time of our proposed two approximation algorithm decreases but the running time of two baseline algorithms keeps stable. The reason is that, when the thresholds are larger, the original delivery fee of each order that can be saved is higher and we can make orders whose benefits are positive easier. Thus, the number of requests that should be repeatedly assigned in batches decrease and the total running time of our two proposed approximation algorithm decrease. However, since the two baseline algorithms randomly assign requests into orders, their running time is not affected. 
+
+\begin{figure}[t!]\centering 
+	\subfigcapskip=-5pt
+	\vspace{1ex}
+	\subfigure{
+		\scalebox{0.3}[0.25]{\includegraphics{../figures/bar.png}}}\vspace{-2ex}
+	\addtocounter{subfigure}{-1}
+	\subfigure[][{Benefit}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_u_benefit}}
+		\label{subfig:syn_us_benefit}}
+	\subfigure[][{Running Time}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_u_runningtime}}
+		\label{subfig:syn_us_runningtime}}\figureCaptionMargin
+	\vspace{1ex}
+	\caption{\small Effect of $u$ (Syn).}\figureBelowMargin
+	\label{fig:syn_us}
+\end{figure}
+
+\textbf{Effect of the number of users.} Figure~\ref{fig:syn_us} illustrates the experimental results on different numbers of users, from 30k to 70k. In Figure~\ref{subfig:syn_us_benefit}, with the change of of the number of users, the benefits of orders obtained by the four algorithms keep stable. The reason is that the number of users only has a negligible impact on the final benefits. Similarly, as shown in Figure~\ref{subfig:syn_us_runningtime}, the running time of the four algorithms also keep stable with the change of the number of users.
+
+\begin{figure}[t!]\centering 
+	\subfigcapskip=-5pt
+	\vspace{1ex}
+	\subfigure{
+		\scalebox{0.3}[0.25]{\includegraphics{../figures/bar.png}}}\vspace{-2ex}
+	\addtocounter{subfigure}{-1}
+	\subfigure[][{Benefit}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_p_benefit}}
+		\label{subfig:syn_ps_benefit}}
+	\subfigure[][{Running Time}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_p_runningtime}}
+		\label{subfig:syn_ps_runningtime}}\figureCaptionMargin
+		\vspace{1ex}
+	\caption{\small Effect of $p$ (Syn).}\figureBelowMargin
+	\label{fig:syn_p}
+\end{figure}
+\textbf{Effect of the range of each request's price.}  Figure~\ref{fig:syn_p} illustrates the experimental results on different ranges of each request's price, from [5, 200] to [5, 600]. As shown in Figure~\ref{subfig:syn_ps_benefit}, with the increase of the average value of each request's price, the benefits of orders obtained by the Baseline-R algorithms increase slowly but the benefits of orders obtained by the other three algorithms increase significantly. The reason is that, when the The increase of the average value of prices makes it is easier to satisfy the threshold constraint. Since the Baseline-R algorithm assigns orders with coupons randomly, the effect of the increase of prices on its final benefit is not as obvious as others. In Figure~\ref{subfig:syn_ps_runningtime}, with the increase of prices, the running time of our two proposed approximation algorithm first increases and then keeps stable. The reason is that, at beginning, with the increase of the average value of prices, the number of orders that two approximation algorithms can make is larger, which increases the running time. Later when the prices of requests are large enough, the assignments are dominated by other constraints and the number of orders keeps stable. Since the two baseline algorithms first randomly assign requests into orders, the increase of prices does not increase the number of orders that should be processed by these two algorithms. Instead, with the increase of prices, the orders that randomly made by the two baseline algorithms are more likely to be eligible. Thus, the number of requests that are assigned repeatedly in batches is smaller which decreases the running time of the two baseline algorithms.
+
+\begin{figure}[t!]\centering
+	\subfigcapskip=-5pt
+	\subfigure{
+		\scalebox{0.3}[0.25]{\includegraphics{../figures/bar.png}}}\vspace{-2ex}
+	\addtocounter{subfigure}{-1}
+	\subfigure[][{Benefit}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_weight_benefit}}
+		\label{subfig:syn_ws_benefit}}
+	\subfigure[][{Running Time}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_weight_runningtime}}
+		\label{subfig:syn_ws_runningtime}}\figureCaptionMargin
+		\vspace{1ex}
+	\caption{\small Effect of weight (Syn).}\figureBelowMargin
+	\label{fig:syn_ws}
+\end{figure}
+
+\textbf{Effect of the range of each request's weight.}  Figure~\ref{fig:syn_ws} illustrates the experimental results on different ranges of each request's weight, from [0.01, 1] to [0.01, 3]. As shown in Figure~\ref{subfig:syn_ws_benefit}, with the increase of the average value of each request's weight, the benefits of orders obtained by the four algorithms decrease. The reason is that, the increase of the average value of weight makes the extra delivery fees of orders higher. In Figure~\ref{subfig:syn_ws_runningtime}, with the increase of weights, the running time of four algorithms keep stable since their time complexities are not related to the weights of requests.
+
+\begin{figure}[t!]\centering
+	\subfigcapskip=-5pt
+	\vspace{1ex}	
+	\subfigure{
+		\scalebox{0.3}[0.25]{\includegraphics{../figures/bar.png}}}\vspace{-2ex}
+	\addtocounter{subfigure}{-1}
+	\subfigure[][{Benefit}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_r_wait_benefit}}
+		\label{subfig:syn_rw_benefit}}
+	\subfigure[][{Running Time}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_r_wait_runningtime}}
+		\label{subfig:syn_rw_runningtime}}\figureCaptionMargin
+	\vspace{1ex}
+	\caption{\small Effect of $ec-bc$ (Syn).}\figureBelowMargin
+	\label{fig:syn_rw}
+\end{figure}
+
+\textbf{Effect of the range of each request's waiting time.} Figure~\ref{fig:syn_rw} illustrates the experimental results on different ranges of each request's waiting time, from [1, 60] to [1, 1200]. As shown in Figure~\ref{subfig:syn_rw_benefit}, the larger the average value of each request's waiting time, the higher the benefits of orders obtained by the four algorithms. The reason is that, when the waiting time is longer, the time constraint is more easily to satisfy and more orders can be obtained. In Figure~\ref{subfig:syn_rw_runningtime}, when the waiting time is longer, the running time of the four algorithms increase. The reason is that, when the waiting time is longer, for each request, there are more requests that can be grouped together which increases the time complexities of algorithms.
+
+\begin{figure}[t!]\centering
+	\subfigcapskip=-5pt
+	
+	\subfigure{
+		\scalebox{0.3}[0.25]{\includegraphics{../figures/bar.png}}}\vspace{-2ex}
+	\addtocounter{subfigure}{-1}
+	\subfigure[][{Benefit}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_c_benefit}}
+		\label{subfig:syn_c_benefit}}
+	\subfigure[][{Running Time}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_c_runningtime}}
+		\label{subfig:syn_c_runningtime}}\figureCaptionMargin
+		\vspace{1ex}
+	\caption{\small Effect of $c$ (Syn).}\figureBelowMargin
+	\label{fig:syn_c}
+\end{figure}
+\textbf{Effect of the number of coupons.} Figure~\ref{fig:syn_c} illustrates the experimental results on different numbers of coupons, from 500 to 2500. In Figure~\ref{subfig:syn_c_benefit}, with the increase of the number of coupons, the benefits of orders obtained by the four algorithms increase. The reason is that, when there are more coupons, for each order, there are more valid coupons can be used, which increases benefits. In Figure~\ref{subfig:syn_c_runningtime}, with the increase of the number of coupons, the running time of our proposed two approximation algorithms increases sharply but the running time of two baseline algorithms increases slowly. The reason is that, the running time of two baseline algorithms is dominated by the process of retrieving a set of valid orders whose active periods are matched for requests. Thus, the increase of the number of coupons does not have a big impact on their running time. 
+\begin{figure}[t!]\centering
+	\subfigcapskip=-5pt
+		\vspace{1ex}
+	\subfigure{
+		\scalebox{0.30}[0.25]{\includegraphics{../figures/bar.png}}}\vspace{-2ex}
+	\addtocounter{subfigure}{-1}
+	\subfigure[][{Benefit}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_threshold_benefit}}
+		\label{subfig:syn_th_benefit}}
+	\subfigure[][{Running Time}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_threshold_runningtime}}
+		\label{subfig:syn_th_runningtime}}\figureCaptionMargin
+	\vspace{1ex}
+	\caption{\small Effect of $th$ (Syn).}\figureBelowMargin
+	\label{fig:syn_th}
+\end{figure}
+
+\textbf{Effect of the range of each coupon's threshold.} Figure~\ref{fig:syn_th} illustrates the experimental results on different ranges of each coupon's threshold, from [50, 600] to [50, 1400]. As shown in Figure~\ref{subfig:syn_th_benefit}, with the increase of the average value of coupons' thresholds, the benefits of orders obtained by the four algorithms decrease. The reason is that, with the increase of coupons' threshold, it is more difficult to satisfy the threshold constraint, which decreases the total benefits. In Figure~\ref{subfig:syn_th_runningtime}, the increase of coupons' thresholds increase the running time of four algorithms. The reason is that, when the thresholds of coupons are high, it is more difficult to make orders satisfying the threshold constraint. Thus, requests should be assigned repeatedly in batches, which increases the running time.
+
+\begin{figure}[t!]\centering
+	\subfigcapskip=-5pt
+	\subfigure{
+		\scalebox{0.3}[0.25]{\includegraphics{../figures/bar.png}}}\vspace{-2ex}
+	\addtocounter{subfigure}{-1}
+	\subfigure[][{Benefit}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_scope_benefit}}
+		\label{subfig:syn_scope_benefit}}
+	\subfigure[][{Running Time}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_scope_runningtime}}
+		\label{subfig:syn_scope_runningtime}}\figureCaptionMargin
+	\vspace{1ex}
+	\caption{\small Effect of scope (Syn).}\figureBelowMargin
+	\label{fig:syn_scope}
+\end{figure}
+
+\textbf{Effect of the range of each coupon's scope.} Figure~\ref{fig:syn_scope} illustrates the experimental results on different ranges of each coupon's scope, from [1, 2] to [1, 10]. In Figure~\ref{subfig:syn_scope_benefit}, with the increase of the cardinality of each coupon's scope, the benefits of orders obtained by the Baseline-R algorithm keep stable but the benefits of orders obtained by the other three algorithms increase dramatically. The reason is that, when the cardinality of each coupon's scope is larger, it is more easily to satisfy the threshold constraint and make more orders, which increases the total benefits of orders. However, since the Baseline-R algorithm assigns orders with coupons randomly, the benefits of orders obtained by the Baseline-R algorithm are not affected. In Figure~\ref{subfig:syn_scope_runningtime}, the running time of the Baseline-R algorithm keeps stable, the running time of the Baseline-G algorithm decreases, and the running time of our proposed two approximation algorithms increase sharply. Because the Baseline-R algorithm assigns orders with coupons randomly, its running time is not affected by the increase of the cardinality of each coupon's scope. When the cardinality is larger, it is more easily to make eligible orders and the number of requests that are assigned repeatedly in batches decreases, which decreases the running time of the Baseline-G algorithm. With the increase of the cardinality, for each order, the number of valid coupons is larger, which increases the running time of our proposed two approximation algorithms.
+
+\begin{figure}[t!]\centering
+	\subfigcapskip=-5pt
+		\vspace{1ex}
+	\subfigure{
+		\scalebox{0.3}[0.25]{\includegraphics{../figures/bar.png}}}\vspace{-2ex}
+	\addtocounter{subfigure}{-1}
+	\subfigure[][{Benefit}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_quota_benefit}}
+		\label{subfig:syn_quota_benefit}}
+	\subfigure[][{Running Time}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_quota_runningtime}}
+		\label{subfig:syn_quota_runningtime}}\figureCaptionMargin
+		\vspace{1ex}
+	\caption{\small Effect of $q$ (Syn).}\figureBelowMargin
+	\label{fig:syn_quota}
+\end{figure}
+
+\textbf{Effect of the range of each coupon's quota.} Figure~\ref{fig:syn_quota} illustrates the experimental results on different ranges of each coupon's quota, from [1, 3] to [1, 11]. In Figure~\ref{subfig:syn_quota_benefit}, with the increase of the cardinality of each coupon's scope, the benefits of orders obtained by the Baseline-R algorithm keep stable but the benefits of orders obtained by the other three algorithms increase. Particularly, at beginning, the benefits of orders obtained by the Baseline-G algorithm and two approximation algorithms are constrained by the quota constraint. When the quota is large, the benefits of orders obtained by these three algorithms are dominated by other constraints. In Figure~\ref{subfig:syn_quota_runningtime}, since the time complexities not related to the value of each coupon's quota, the running time of four algorithms keep stable with the change of coupons' quotas. 
+
+\begin{figure}[t!]\centering
+	\subfigcapskip=-5pt
+	\subfigure{
+		\scalebox{0.3}[0.25]{\includegraphics{../figures/bar.png}}}\vspace{-2ex}
+	\addtocounter{subfigure}{-1}
+	\subfigure[][{Benefit}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_c_wait_benefit}}
+		\label{subfig:syn_c_wait_benefit}}
+	\subfigure[][{Running Time}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_c_wait_runningtime}}
+		\label{subfig:syn_c_wait_runningtime}}\figureCaptionMargin
+	\vspace{1ex}
+	\caption{\small Effect of $ec-bc$ (Syn).}\figureBelowMargin
+	\label{fig:syn_c_wait}
+\end{figure}
+
+\textbf{Effect of the range of each coupon's active time.} Figure~\ref{fig:syn_c_wait} illustrates the experimental results on different ranges of each coupon's quota, from [1s, 1h] to [1s, 5h]. As shown in Figure~\ref{subfig:syn_c_wait_benefit}, with the increase of each coupon's active time, the benefits of orders obtained by the four algorithms increase. The reason is that, when each coupon's active time is longer, for each order, there are more valid coupons can be used. In Figure~\ref{subfig:syn_c_wait_runningtime}, when the active time of each coupon is longer, the running time of the Baseline-G algorithm decreases, and the running time of the other three algorithm increases. With the increase of the active time, for each order, there are more valid coupons which increases the running time. Thus, the running time of the Baseline-R algorithm and our two proposed approximation algorithms increases. Besides, when the active time of each coupon is larger, it is more easily to satisfy the time constraint and make more orders. Thus, the number of requests that are assigned repeatedly in batches decreases. Since the running time of the Baseline-G algorithm is dominated by the number of requests, combining these two impacts, the running time of the Baseline-G decreases.
+
+\begin{figure}[t!]\centering
+	\subfigcapskip=-5pt
+		\vspace{1ex}
+	\subfigure{
+		\scalebox{0.3}[0.25]{\includegraphics{../figures/bar.png}}}\vspace{-2ex}
+	\addtocounter{subfigure}{-1}
+	\subfigure[][{Benefit}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_b_benefit}}
+		\label{subfig:syn_batches_benefit}}
+	\subfigure[][{Running Time}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_b_runningtime}}
+		\label{subfig:syn_batches_runningtime}}\figureCaptionMargin
+	\vspace{1ex}
+	\caption{\small Effect of batches (Syn).}\figureBelowMargin
+	\label{fig:syn_batches}
+\end{figure}
+\textbf{Effect of the number of batches.} Figure~\ref{fig:syn_batches} illustrates the experimental results on different numbers of batches, from 1440 to 72. In Figure~\ref{subfig:syn_batches_benefit}, the benefits of orders obtained by the four algorithms keep stable with the change of the number of batches. In the e-commerce scenario, the active period of requests/coupons is long, compared with the size of a batch and the number of requests/coupons in each batch is large. Thus, the size of batches has little impact on the benefits of orders. In Figure~\ref{subfig:syn_batches_runningtime}, with the increase of the number of batches, the running time of four algorithms first decreases and then increases. At beginning, when the size of each batch is small, the number of requests/coupons in each batch is small and many requests cannot be assigned to an eligible order. Thus, many requests have to be assigned repeatedly in batches. With the decrease of the number of batches, the size of each batch is larger and the number of requests/coupons in each batch is larger. Thus, the average number of batches of a request being assigned decreases, which decreases the running time. However, with the decrease of the number of batches, the number of requests/coupons in each batch is larger. For each request, there are more candidate requests and more candidate coupons, which increases the running time of algorithms. 
+\begin{figure}[t!]\centering
+	\subfigcapskip=-5pt
+	\subfigure{
+		\scalebox{0.30}[0.25]{\includegraphics{../figures/bar.png}}}\vspace{-2ex}
+	\addtocounter{subfigure}{-1}
+	\subfigure[][{Benefit}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_first_benefit}}
+		\label{subfig:syn_first_benefit}}
+	\subfigure[][{Running Time}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_first_runningtime}}
+		\label{subfig:syn_first_runningtime}}\figureCaptionMargin
+	\vspace{1ex}
+	\caption{\small Effect of first heavy (Syn).}\figureBelowMargin
+	\label{fig:syn_first}
+\end{figure}
+\textbf{Effect of the range of the first heavy delivery cost.}  Figure~\ref{fig:syn_first} illustrates the experimental results on different ranges of the first heavy delivery cost, from [1, 6] to [1, 14]. In Figure~\ref{subfig:syn_first_benefit}, with the increase of the first heavy delivery cost, the benefits of orders obtained by the Order-First algorithm decreases, the benefits of orders obtained by the Warehouse-First algorithm keeps stable, and the benefits of orders obtained by the two baseline algorithms increase. The reason is that, when the first heavy delivery cost is larger, the extra delivery cost of each each request is higher. Since the Order-First algorithm first groups requests into orders, it may generate many orders whose extra delivery cost is high. Thus, with the increase of the first heavy delivery cost, the benefits of orders obtained by the Order-First algorithm decrease. Since the original delivery fee of each request is also increase and the Warehouse-First algorithm first assigns requests with the nearest warehouse, the impact of the change of the first heavy delivery cost on the benefits of orders obtained by the Warehouse-First algorithm is little. As shown in Figure~\ref{subfig:syn_first_runningtime}, the running time of four algorithms keeps stable with the change of the first heavy delivery cost. The reason is that, the time complexities of the four algorithms are not related to the first heavy delivery cost.
+
+\begin{figure}[t!]\centering
+	\subfigcapskip=-5pt
+		\vspace{1ex}
+	\subfigure{
+		\scalebox{0.3}[0.25]{\includegraphics{../figures/bar.png}}}\vspace{-2ex}
+	\addtocounter{subfigure}{-1}
+	\subfigure[][{Benefit}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_exceed_benefit}}
+		\label{subfig:syn_exceed_benefit}}
+	\subfigure[][{Running Time}]{
+		\scalebox{0.33}[0.33]{\includegraphics{../figures/syn_exceed_runningtime}}
+		\label{subfig:syn_exceed_runningtime}}\figureCaptionMargin
+	\vspace{1ex}
+	\caption{\small Effect of exceed heavy (Syn).}\figureBelowMargin
+	\label{fig:syn_exceed}
+\end{figure}
+
+\textbf{Effect of the range of the exceed heavy delivery cost.}  Figure~\ref{fig:syn_exceed} illustrates the experimental results on different ranges of the exceed heavy delivery cost, from [1, 2] to [1, 6]. In Figure~\ref{subfig:syn_exceed_benefit}, with the increase of the exceed heavy delivery cost, the benefits of orders obtained by the four algorithm decreases. The reason is that, after grouping requests into orders, the weight of each order usually exceeds the first heavy and each order needs to pay the exceed heavy delivery cost. The higher the exceed heavy delivery cost, the higher the extra delivery cost, which decreases the benefits of orders. As shown in Figure~\ref{subfig:syn_exceed_runningtime}, the running time of four algorithms keeps stable with the change of the exceed heavy delivery cost. The reason is that, the time complexities of the four algorithms are not related to the exceed heavy delivery cost.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
