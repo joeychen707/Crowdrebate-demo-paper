@@ -18,11 +18,13 @@ maximize total benefit. Meanwhile, we give the exposure of online retailers' pro
 
 Our platform operates as follows~\ref{fig:Crowdrebate}. Users can post their requirements on our platform. Each requirement corresponds to the e-commerce platform they would like to order from, such as the specific stores, specific products, and prices, as well as the expected period of placing order. Based on the received requests, we will make an order association and match the coupons we crawled from the e-commerce platform to maximize each order's rebate. Owing to the fact that we place the orders for consumers, the products will first be sent to our warehouses from the online stores, and then we will distribute the products to the according users.
 
-Thus, our demo has three core components: 
+Generally, Crowdrebate relies on three components. The user interface provides service for users to post requests and track datas. The algorithm library supports our core features, group ordering and recommendation. The data manager handles business logic and data storage.
+
+Thus, our demo has following contributions:
 \begin{itemize}
-	\item Users can publish their needs, our platform collects the demands and crawls online coupons to make patchwork combinations;
-	\item Users can view the latest coupons of e-commerce platforms and the popular products that users would like to buy on the platforms;
-	\item Users can view their historical data analysis, such as our service charges and the amount of money we help users to save. Furthermore, we can also provide an API to our partner platforms so that they can see the coupon data (such as the regional distribution of users, favorite stores and products, etc.) of the coupons used on our platform.
+	\item We develope a platform for users to post for group ordering and track realtime information on mobile phones.
+	\item We design two algorithms to combine orders for maximum rebates under different scenarios.
+	\item We equip the platform with process automation and recommendation to handle large scale data and enrich user experience.
 \end{itemize}
 \begin{figure}[t] 
 	\centering %图片居中
