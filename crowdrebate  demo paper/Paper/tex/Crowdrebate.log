@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.8.3)  14 NOV 2020 20:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.8.3)  15 NOV 2020 00:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -705,11 +705,11 @@ Package pdftex.def Info: ../figure/crowdrebate process.png  used on input line
 
 
  <../figure/crowdrebate process.png>]
-<../figure/ar.png, id=108, 752.8125pt x 386.44376pt>
+<../figure/ar.png, id=108, 1368.11125pt x 702.12312pt>
 File: ../figure/ar.png Graphic file (type png)
 <use ../figure/ar.png>
 Package pdftex.def Info: ../figure/ar.png  used on input line 31.
-(pdftex.def)             Requested size: 258.0pt x 132.44463pt.
+(pdftex.def)             Requested size: 258.0pt x 132.40842pt.
 
 Overfull \hbox (6.0pt too wide) in paragraph at lines 31--32
  [][] 
@@ -717,52 +717,52 @@ Overfull \hbox (6.0pt too wide) in paragraph at lines 31--32
 
 ) (./System Architecture.tex [2 <../figure/ar.png>])
 (./Demonstration overview.tex
-<../figure/request 1.png, id=117, 831.105pt x 1798.72pt>
+<../figure/request 1.png, id=118, 831.105pt x 1798.72pt>
 File: ../figure/request 1.png Graphic file (type png)
 <use ../figure/request 1.png>
-Package pdftex.def Info: ../figure/request 1.png  used on input line 12.
+Package pdftex.def Info: ../figure/request 1.png  used on input line 10.
 (pdftex.def)             Requested size: 831.10297pt x 1798.71562pt.
-<../figure/request 2.png, id=118, 831.105pt x 1798.72pt>
+<../figure/request 2.png, id=119, 831.105pt x 1798.72pt>
 File: ../figure/request 2.png Graphic file (type png)
 <use ../figure/request 2.png>
-Package pdftex.def Info: ../figure/request 2.png  used on input line 15.
+Package pdftex.def Info: ../figure/request 2.png  used on input line 13.
 (pdftex.def)             Requested size: 831.10297pt x 1798.71562pt.
-<../figure/request 3.png, id=119, 831.105pt x 1798.72pt>
+<../figure/request 3.png, id=120, 831.105pt x 1798.72pt>
 File: ../figure/request 3.png Graphic file (type png)
 <use ../figure/request 3.png>
-Package pdftex.def Info: ../figure/request 3.png  used on input line 18.
+Package pdftex.def Info: ../figure/request 3.png  used on input line 16.
 (pdftex.def)             Requested size: 831.10297pt x 1798.71562pt.
-<../figure/check 1.png, id=123, 831.105pt x 1798.72pt>
+<../figure/check 1.png, id=124, 831.105pt x 1798.72pt>
 File: ../figure/check 1.png Graphic file (type png)
 <use ../figure/check 1.png>
-Package pdftex.def Info: ../figure/check 1.png  used on input line 29.
+Package pdftex.def Info: ../figure/check 1.png  used on input line 28.
 (pdftex.def)             Requested size: 831.10297pt x 1798.71562pt.
-<../figure/check 2.png, id=124, 831.105pt x 1798.72pt>
+<../figure/check 2.png, id=125, 831.105pt x 1798.72pt>
 File: ../figure/check 2.png Graphic file (type png)
 <use ../figure/check 2.png>
-Package pdftex.def Info: ../figure/check 2.png  used on input line 32.
+Package pdftex.def Info: ../figure/check 2.png  used on input line 31.
 (pdftex.def)             Requested size: 831.10297pt x 1798.71562pt.
  [3 <../figure/request 1.png> <../figure/request 2.png> <../figure/request 3.pn
 g> <../figure/check 1.png> <../figure/check 2.png>]
-<../figure/home1.png, id=143, 831.105pt x 1798.72pt>
+<../figure/home1.png, id=144, 831.105pt x 1798.72pt>
 File: ../figure/home1.png Graphic file (type png)
 <use ../figure/home1.png>
-Package pdftex.def Info: ../figure/home1.png  used on input line 46.
+Package pdftex.def Info: ../figure/home1.png  used on input line 45.
 (pdftex.def)             Requested size: 831.10297pt x 1798.71562pt.
-<../figure/home2.png, id=144, 831.105pt x 1798.72pt>
+<../figure/home2.png, id=145, 831.105pt x 1798.72pt>
 File: ../figure/home2.png Graphic file (type png)
 <use ../figure/home2.png>
-Package pdftex.def Info: ../figure/home2.png  used on input line 49.
+Package pdftex.def Info: ../figure/home2.png  used on input line 48.
 (pdftex.def)             Requested size: 831.10297pt x 1798.71562pt.
-<../figure/data1.png, id=147, 831.105pt x 1798.72pt>
+<../figure/data1.png, id=148, 831.105pt x 1798.72pt>
 File: ../figure/data1.png Graphic file (type png)
 <use ../figure/data1.png>
-Package pdftex.def Info: ../figure/data1.png  used on input line 62.
+Package pdftex.def Info: ../figure/data1.png  used on input line 61.
 (pdftex.def)             Requested size: 831.10297pt x 1798.71562pt.
-<../figure/data2.png, id=148, 831.105pt x 1798.72pt>
+<../figure/data2.png, id=149, 831.105pt x 1798.72pt>
 File: ../figure/data2.png Graphic file (type png)
 <use ../figure/data2.png>
-Package pdftex.def Info: ../figure/data2.png  used on input line 65.
+Package pdftex.def Info: ../figure/data2.png  used on input line 64.
 (pdftex.def)             Requested size: 831.10297pt x 1798.71562pt.
 ) (./conclusion.tex) (./Crowdrebate.bbl
 Underfull \hbox (badness 3579) in paragraph at lines 25--27
@@ -815,7 +815,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 78.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 78.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 78.
 Package rerunfilecheck Info: File `Crowdrebate.out' has not changed.
-(rerunfilecheck)             Checksum: D9B5530E1AC9D7702997FE25FFC4E2D1;1121.
+(rerunfilecheck)             Checksum: 4BADE90B921BF3B30C4ABD81F102BBB3;1166.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 78.
  ) 
 Here is how much of TeX's memory you used:
@@ -839,9 +839,9 @@ dist/fonts/type1/urw/courier/ucrr8a.pfb><e:/texlive/2020/texmf-dist/fonts/type1
 8a.pfb><e:/texlive/2020/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><e:/texliv
 e/2020/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><e:/texlive/2020/texmf-dist/
 fonts/type1/urw/times/utmri8a.pfb>
-Output written on Crowdrebate.pdf (4 pages, 2097518 bytes).
+Output written on Crowdrebate.pdf (4 pages, 2235125 bytes).
 PDF statistics:
- 234 PDF objects out of 1000 (max. 8388607)
+ 235 PDF objects out of 1000 (max. 8388607)
  191 compressed objects within 2 object streams
  44 named destinations out of 1000 (max. 500000)
  192 words of extra memory for PDF output out of 10000 (max. 10000000)
