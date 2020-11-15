@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.8.3)  15 NOV 2020 12:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.8.3)  15 NOV 2020 17:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -699,7 +699,7 @@ LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10> not available
 File: ../figure/crowdrebate process.png Graphic file (type png)
 <use ../figure/crowdrebate process.png>
 Package pdftex.def Info: ../figure/crowdrebate process.png  used on input line 
-10.
+8.
 (pdftex.def)             Requested size: 206.39685pt x 123.46674pt.
  [1{e:/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
@@ -708,10 +708,10 @@ Package pdftex.def Info: ../figure/crowdrebate process.png  used on input line
 <../figure/ar.png, id=108, 1368.11125pt x 702.12312pt>
 File: ../figure/ar.png Graphic file (type png)
 <use ../figure/ar.png>
-Package pdftex.def Info: ../figure/ar.png  used on input line 31.
+Package pdftex.def Info: ../figure/ar.png  used on input line 29.
 (pdftex.def)             Requested size: 258.0pt x 132.40842pt.
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 31--32
+Overfull \hbox (6.0pt too wide) in paragraph at lines 29--30
  [][] 
  []
 
@@ -792,8 +792,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 29--31
 ult-[] . rJUQy[]ulFP .
  []
 
-) [4 <../figure/check 1.png> <../figure/check 2.png> <../figure/home1.png> <../
-figure/home2.png> <../figure/data1.png> <../figure/data2.png>]
+
+Package balance Warning: You have called \balance in second column
+(balance)                Columns might not be balanced.
+
+[4 <../figure/check 1.png> <../figure/check 2.png> <../figure/home1.png> <../fi
+gure/home2.png> <../figure/data1.png> <../figure/data2.png>])
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -810,8 +814,11 @@ Package caption Warning: Unused \captionsetup[table] on input line 15.
 See the caption package documentation for explanation.
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 78.
+[5
+
+]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 78.
-(./Crowdrebate.aux)
+ (./Crowdrebate.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 78.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 78.
 Package rerunfilecheck Info: File `Crowdrebate.out' has not changed.
@@ -819,13 +826,13 @@ Package rerunfilecheck Info: File `Crowdrebate.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 78.
  ) 
 Here is how much of TeX's memory you used:
- 13387 strings out of 480906
- 243461 string characters out of 5912174
+ 13388 strings out of 480906
+ 243467 string characters out of 5912174
  513948 words of memory out of 5000000
  28673 multiletter control sequences out of 15000+600000
  579048 words of font info for 125 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 47i,11n,48p,1299b,733s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 47i,11n,48p,1318b,872s stack positions out of 5000i,500n,10000p,200000b,80000s
 {e:/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc}<e:/texlive/2020/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/texlive/2020/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmmi6.pfb><e:/texlive/2020/texmf-dist/fonts/type1/
@@ -839,10 +846,10 @@ dist/fonts/type1/urw/courier/ucrr8a.pfb><e:/texlive/2020/texmf-dist/fonts/type1
 8a.pfb><e:/texlive/2020/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><e:/texliv
 e/2020/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><e:/texlive/2020/texmf-dist/
 fonts/type1/urw/times/utmri8a.pfb>
-Output written on Crowdrebate.pdf (4 pages, 2236743 bytes).
+Output written on Crowdrebate.pdf (5 pages, 2237311 bytes).
 PDF statistics:
- 238 PDF objects out of 1000 (max. 8388607)
- 194 compressed objects within 2 object streams
- 45 named destinations out of 1000 (max. 500000)
+ 242 PDF objects out of 1000 (max. 8388607)
+ 197 compressed objects within 2 object streams
+ 46 named destinations out of 1000 (max. 500000)
  192 words of extra memory for PDF output out of 10000 (max. 10000000)
 
