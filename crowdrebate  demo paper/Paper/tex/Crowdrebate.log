@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.9.21)  15 NOV 2020 20:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.9.21)  15 NOV 2020 21:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -690,7 +690,7 @@ LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <9> not available
 LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10> not available
 (Font)              Font shape `OT1/pcr/m/sl' tried instead on input line 53.
  (./abstract.tex) (./introduction.tex
-<../figure/crowdrebate process.png, id=79, 1236.62pt x 739.76375pt>
+<../figure/crowdrebate process.png, id=78, 1236.62pt x 739.76375pt>
 File: ../figure/crowdrebate process.png Graphic file (type png)
 <use ../figure/crowdrebate process.png>
 Package pdftex.def Info: ../figure/crowdrebate process.png  used on input line 
@@ -700,7 +700,7 @@ Package pdftex.def Info: ../figure/crowdrebate process.png  used on input line
 
 
  <../figure/crowdrebate process.png>]
-<../figure/ar.png, id=108, 1368.11125pt x 702.12312pt>
+<../figure/ar.png, id=106, 1368.11125pt x 702.12312pt>
 File: ../figure/ar.png Graphic file (type png)
 <use ../figure/ar.png>
 Package pdftex.def Info: ../figure/ar.png  used on input line 29.
@@ -712,60 +712,54 @@ Overfull \hbox (6.0pt too wide) in paragraph at lines 29--30
 
 ) (./System Architecture.tex [2 <../figure/ar.png>])
 (./Demonstration overview.tex
-<../figure/request 1.png, id=118, 831.105pt x 1798.72pt>
+<../figure/request 1.png, id=116, 831.105pt x 1798.72pt>
 File: ../figure/request 1.png Graphic file (type png)
 <use ../figure/request 1.png>
 Package pdftex.def Info: ../figure/request 1.png  used on input line 10.
 (pdftex.def)             Requested size: 831.10297pt x 1798.71562pt.
-<../figure/request 2.png, id=119, 831.105pt x 1798.72pt>
+<../figure/request 2.png, id=117, 831.105pt x 1798.72pt>
 File: ../figure/request 2.png Graphic file (type png)
 <use ../figure/request 2.png>
 Package pdftex.def Info: ../figure/request 2.png  used on input line 13.
 (pdftex.def)             Requested size: 831.10297pt x 1798.71562pt.
-<../figure/request 3.png, id=120, 831.105pt x 1798.72pt>
+<../figure/request 3.png, id=118, 831.105pt x 1798.72pt>
 File: ../figure/request 3.png Graphic file (type png)
 <use ../figure/request 3.png>
 Package pdftex.def Info: ../figure/request 3.png  used on input line 16.
 (pdftex.def)             Requested size: 831.10297pt x 1798.71562pt.
-<../figure/check 1.png, id=125, 831.105pt x 1798.72pt>
+<../figure/check 1.png, id=123, 831.105pt x 1798.72pt>
 File: ../figure/check 1.png Graphic file (type png)
 <use ../figure/check 1.png>
 Package pdftex.def Info: ../figure/check 1.png  used on input line 28.
 (pdftex.def)             Requested size: 831.10297pt x 1798.71562pt.
-<../figure/check 2.png, id=126, 831.105pt x 1798.72pt>
+<../figure/check 2.png, id=124, 831.105pt x 1798.72pt>
 File: ../figure/check 2.png Graphic file (type png)
 <use ../figure/check 2.png>
 Package pdftex.def Info: ../figure/check 2.png  used on input line 31.
 (pdftex.def)             Requested size: 831.10297pt x 1798.71562pt.
- [3 <../figure/request 1.png> <../figure/request 2.png> <../figure/request 3.pn
-g>]
-<../figure/home1.png, id=145, 831.105pt x 1798.72pt>
+<../figure/home1.png, id=127, 831.105pt x 1798.72pt>
 File: ../figure/home1.png Graphic file (type png)
 <use ../figure/home1.png>
 Package pdftex.def Info: ../figure/home1.png  used on input line 45.
 (pdftex.def)             Requested size: 831.10297pt x 1798.71562pt.
-<../figure/home2.png, id=146, 831.105pt x 1798.72pt>
+<../figure/home2.png, id=128, 831.105pt x 1798.72pt>
 File: ../figure/home2.png Graphic file (type png)
 <use ../figure/home2.png>
 Package pdftex.def Info: ../figure/home2.png  used on input line 48.
 (pdftex.def)             Requested size: 831.10297pt x 1798.71562pt.
-<../figure/data1.png, id=149, 831.105pt x 1798.72pt>
+ [3 <../figure/request 1.png> <../figure/request 2.png> <../figure/request 3.pn
+g>]
+<../figure/data1.png, id=148, 831.105pt x 1798.72pt>
 File: ../figure/data1.png Graphic file (type png)
 <use ../figure/data1.png>
 Package pdftex.def Info: ../figure/data1.png  used on input line 61.
 (pdftex.def)             Requested size: 831.10297pt x 1798.71562pt.
-<../figure/data2.png, id=150, 831.105pt x 1798.72pt>
+<../figure/data2.png, id=149, 831.105pt x 1798.72pt>
 File: ../figure/data2.png Graphic file (type png)
 <use ../figure/data2.png>
 Package pdftex.def Info: ../figure/data2.png  used on input line 64.
 (pdftex.def)             Requested size: 831.10297pt x 1798.71562pt.
 ) (./conclusion.tex) (./Crowdrebate.bbl
-
-Package balance Warning: You have called \balance in second column
-(balance)                Columns might not be balanced.
-
-[4 <../figure/check 1.png> <../figure/check 2.png> <../figure/home1.png> <../fi
-gure/home2.png> <../figure/data1.png> <../figure/data2.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 25--27
 \OT1/ptm/m/n/8 com / sites / forrester / 2020 / 11 / 02 / what-[]to-[]expect-[]
 on-[]singles-[]day-[]2020 /
@@ -783,7 +777,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 29--31
 ult-[] . rJUQy[]ulFP .
  []
 
-)
+
+Package balance Warning: You have called \balance in second column
+(balance)                Columns might not be balanced.
+
+[4 <../figure/check 1.png> <../figure/check 2.png> <../figure/home1.png> <../fi
+gure/home2.png> <../figure/data1.png> <../figure/data2.png>])
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -814,11 +813,11 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 78.
 Here is how much of TeX's memory you used:
  13326 strings out of 480608
  243371 string characters out of 5903630
- 510767 words of memory out of 5000000
+ 511767 words of memory out of 5000000
  28907 multiletter control sequences out of 15000+600000
  576298 words of font info for 120 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,11n,48p,1541b,874s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,11n,48p,1541b,872s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/tex
 live/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texliv
@@ -831,10 +830,10 @@ xmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2020/texmf-dist
 type1/urw/times/utmb8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/
 times/utmbi8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utm
 r8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Crowdrebate.pdf (5 pages, 2222778 bytes).
+Output written on Crowdrebate.pdf (5 pages, 2222364 bytes).
 PDF statistics:
- 239 PDF objects out of 1000 (max. 8388607)
- 196 compressed objects within 2 object streams
+ 238 PDF objects out of 1000 (max. 8388607)
+ 195 compressed objects within 2 object streams
  48 named destinations out of 1000 (max. 500000)
  192 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,6 +1,6 @@
 \section{System Architecture}
 
-Figure~\ref{fig:ar} depicts the architecture of Crowdrebate platform. The user interface module runs on the client-side, enabling both general users and merchant users to get corresponding services. The other three core modules, process automation, crowdrebate algorithm, and recommendation system, run on the server host and provide support for the core functionalities in Crowdrebate. We introduce the technical details of these modules in the rest part of this section.
+Figure~\ref{fig:ar} depicts the architecture of Crowdrebate platform. The user interface module runs on the client-side, enabling both general users and merchant users to get corresponding services. The other three core modules, process automation, crowdrebate algorithm~\cite{}, and recommendation system, run on the server host and provide support for the core functionalities in Crowdrebate. We introduce the technical details of these modules in the rest part of this section.
 
 \subsection{User Interface}
 
@@ -24,7 +24,7 @@ Crowdrebate opens API and provides a visualized data dashboard to cooperating on
 
 \subsection{Crowdrebate Algorithm}
 
-Crowdrebate algorithm can place orders for users' best interests and works as one of the most crucial components in our platform. Considering the combination of coupons and delivery costs, Crowdrebate proposed two algorithms, the order-first algorithm and the delivery-first algorithm, to adapt to different scenarios. Users can freely choose from these algorithms which best fits their needs, and their requests will wait in two pools to process separately.
+Crowdrebate algorithm~\cite{} can place orders for users' best interests and works as one of the most crucial components in our platform. Considering the combination of coupons and delivery costs, Crowdrebate proposed two algorithms, the order-first algorithm and the delivery-first algorithm, to adapt to different scenarios. Users can freely choose from these algorithms which best fits their needs, and their requests will wait in two pools to process separately.
 
 \textbf{The Order-First Algorithm.} In most cases, coupons with strict thresholds usually guarantee tempting rebates that should way cover the delivery costs. Under such a scenario, we propose the order-first algorithm to place orders. Generally speaking, this algorithm greedily packs orders for a maximum amount of total rebates while ignoring delivery costs. For each coupon, we traverse requests in the eligible pool and calculate the differential rebate amount when compared to placing an order separately, and the request with the largest amount will be integrated into one order until for any request the differential rebate amount fails to increase. However, the number of coupons used in a newly merged order may exceed the upper limit since their amounts are calculated separately before the merger. We introduce "Dif procedure" to tackle extra coupons while computing for the differential rebate. After packing requests, we need to place the order and assign one single address as the delivery destination. While this algorithm doesn't take the delivery into account before, it assigns a warehouse to the order to minimize the cost of delivery now.
 
