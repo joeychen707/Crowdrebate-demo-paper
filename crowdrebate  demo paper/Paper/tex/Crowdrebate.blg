@@ -7,44 +7,44 @@ Repeated entry---line 157 of file ../reference/add.bib
  : @misc{Groupon
  :              ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 335 of file ../reference/add.bib
+Repeated entry---line 347 of file ../reference/add.bib
  : @misc{double11
  :               ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 409 of file ../reference/add.bib
+Repeated entry---line 421 of file ../reference/add.bib
  : @inproceedings{huang2019x
  :                          ,
 I'm skipping whatever remains of this entry
-You've used 7 entries,
+You've used 8 entries,
             1876 wiz_defined-function locations,
-            506 strings with 4609 characters,
-and the built_in function-call counts, 1261 in all, are:
-= -- 111
-> -- 45
+            510 strings with 4688 characters,
+and the built_in function-call counts, 1362 in all, are:
+= -- 120
+> -- 46
 < -- 0
-+ -- 19
++ -- 20
 - -- 12
-* -- 74
-:= -- 160
-add.period$ -- 7
-call.type$ -- 7
-change.case$ -- 7
+* -- 77
+:= -- 169
+add.period$ -- 8
+call.type$ -- 8
+change.case$ -- 8
 chr.to.int$ -- 0
-cite$ -- 7
-duplicate$ -- 56
-empty$ -- 155
+cite$ -- 8
+duplicate$ -- 60
+empty$ -- 173
 format.name$ -- 12
-if$ -- 323
+if$ -- 352
 int.to.chr$ -- 0
-int.to.str$ -- 7
+int.to.str$ -- 8
 missing$ -- 2
-newline$ -- 24
+newline$ -- 27
 num.names$ -- 2
-pop$ -- 38
+pop$ -- 44
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 57
+skip$ -- 63
 stack$ -- 0
 substring$ -- 52
 swap$ -- 16
@@ -54,6 +54,6 @@ top$ -- 0
 type$ -- 0
 warning$ -- 0
 while$ -- 7
-width$ -- 8
-write$ -- 52
+width$ -- 9
+write$ -- 58
 (There were 3 error messages)
