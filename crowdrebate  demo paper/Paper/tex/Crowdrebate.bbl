@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{2013Black}
 E.~Swilley and R.~E. Goldsmith, ``Black friday and cyber monday: Understanding
@@ -21,13 +21,21 @@ G.~Huang, X.~Cheng, J.~Wang, Y.~Wang, D.~He, T.~Zhang, F.~Li, S.~Wang, W.~Cao,
 \bibitem{dealmoon}
 ``[online] \text{dealmoon}.'' \url{https://www.dealmoon.com/}.
 
-\bibitem{2020}
-``[online] \text{What To Expect On Singles Day 2020}.''
-  \url{https://www.forbes.com/sites/forrester/2020/11/02/what-to-expect-on-singles-day-2020/?sh=574a7400723f}.
-
 \bibitem{double2020}
 ``[online] \text{Must the "discount question" of Double 11 be so difficult?}.''
   \url{https://www.tellerreport.com/business/2020-11-04-must-the-%22discount-question%22-of-double-11-be-so-difficult-.rJUQy_ulFP.html}.
+
+\bibitem{Report}
+``[online] \text{Technical Report }.''
+  \url{cspcheng.github.io/pdf/Crowdrebate-ICDE.pdf}.
+
+\bibitem{etao}
+``[online] \text{etao}.'' \url{https://www.etao.com}.
+
+\bibitem{sarwar2001item}
+B.~Sarwar, G.~Karypis, J.~Konstan, and J.~Riedl, ``Item-based collaborative
+  filtering recommendation algorithms,'' in {\em Proceedings of the 10th
+  international conference on World Wide Web}, pp.~285--295, 2001.
 
 \bibitem{SKU}
 ``[online] \text{SKU}.''

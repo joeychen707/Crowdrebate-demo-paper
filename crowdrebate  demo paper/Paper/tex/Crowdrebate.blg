@@ -1,6 +1,16 @@
 This is BibTeX, Version 0.99d (TeX Live 2020/W32TeX)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Crowdrebate.aux
+Case mismatch error between cite keys report and Report
+---line 31 of file Crowdrebate.aux
+ : \citation{report
+ :                 }
+I'm skipping whatever remains of this command
+Case mismatch error between cite keys report and Report
+---line 32 of file Crowdrebate.aux
+ : \citation{report
+ :                 }
+I'm skipping whatever remains of this command
 The style file: ieeetr.bst
 Database file #1: ../reference/add.bib
 Repeated entry---line 157 of file ../reference/add.bib
@@ -15,45 +25,49 @@ Repeated entry---line 421 of file ../reference/add.bib
  : @inproceedings{huang2019x
  :                          ,
 I'm skipping whatever remains of this entry
-You've used 8 entries,
+Repeated entry---line 611 of file ../reference/add.bib
+ : @misc{Report
+ :             ,
+I'm skipping whatever remains of this entry
+You've used 10 entries,
             1876 wiz_defined-function locations,
-            510 strings with 4688 characters,
-and the built_in function-call counts, 1362 in all, are:
-= -- 120
-> -- 46
+            520 strings with 4893 characters,
+and the built_in function-call counts, 1837 in all, are:
+= -- 165
+> -- 61
 < -- 0
-+ -- 20
-- -- 12
-* -- 77
-:= -- 169
-add.period$ -- 8
-call.type$ -- 8
-change.case$ -- 8
++ -- 26
+- -- 16
+* -- 105
+:= -- 227
+add.period$ -- 10
+call.type$ -- 10
+change.case$ -- 10
 chr.to.int$ -- 0
-cite$ -- 8
-duplicate$ -- 60
-empty$ -- 173
-format.name$ -- 12
-if$ -- 352
+cite$ -- 10
+duplicate$ -- 85
+empty$ -- 228
+format.name$ -- 16
+if$ -- 473
 int.to.chr$ -- 0
-int.to.str$ -- 8
-missing$ -- 2
-newline$ -- 27
-num.names$ -- 2
-pop$ -- 44
+int.to.str$ -- 10
+missing$ -- 3
+newline$ -- 33
+num.names$ -- 3
+pop$ -- 57
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 63
+skip$ -- 83
 stack$ -- 0
-substring$ -- 52
-swap$ -- 16
+substring$ -- 84
+swap$ -- 25
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 7
-width$ -- 9
-write$ -- 58
-(There were 3 error messages)
+while$ -- 11
+width$ -- 12
+write$ -- 73
+(There were 6 error messages)
