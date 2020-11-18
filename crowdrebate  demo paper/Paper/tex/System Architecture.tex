@@ -33,11 +33,11 @@ $r_a, r_b$ refers to the separate rebates for order $a, b$, and $r_{ab}$ refers 
 
 \subsection{Process Automation}
 
-Crowdrebate uses the process automation module to complete the whole procedure from picking items to pay for our server's orders. Basically, the module comprises two sub-modules, the web crawler retrieving the information of products and coupons, and the order bot to automatically place an order. 
+Crowdrebate uses the process automation module to complete the whole procedure from picking items to pay for our server's orders. Basically, the module comprises two sub-modules, the web crawler retrieving the information of products and coupons, and the order bot to automatically place orders. 
 
 \textbf{The Web Crawler.} Currently, two types of information will be crawled, respectively, products and coupons. For the product information, the spider bot crawls the associated coupon information and the meta data of the product for recommendation system. For the coupon information, we take the initiative to crawl information from specialized coupon websites like Etao~\cite{etao} to enrich our available coupon pools. 
 
-\textbf{The Order Bot.} The crowdrebate algorithm runs in rounds periodically and produces final grouped orders each round. Therefore we develop the order bot to handle those orders automatically. Since some exclusive coupons in different orders may violate each other, we introduce multiple accounts to place those exclusive orders, enabling us to run the scripts in parallel.
+\textbf{The Order Bot.} The crowdrebate algorithm runs in rounds periodically and produces final grouped orders each round. Thus we develop the order bot to handle those orders automatically. Since some exclusive coupons in different orders may violate each other, we introduce multiple accounts to place those exclusive orders, enabling us to run the scripts in parallel.
 
 \subsection{Recommendation System}
 
